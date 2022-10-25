@@ -1,0 +1,31 @@
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+
+name: Tests
+jobs:
+  mainnet-test:
+    name: mainnet subgraph tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: |
+          yarn install
+          yarn global add @graphprotocol/graph-cli
+
+      - name: Compile subgraph
+        run: |
+          yarn mainnet-codegen
+          yarn mainnet-build
+
+      - name: Run tests
+        run: |
+          mv ./mainnet/* .
+          mv subgraph.temp.yaml subgraph.yaml
+          graph test
