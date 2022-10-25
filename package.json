@@ -3,8 +3,15 @@
   "version": "0.0.0",
   "repository": "https://github.com/Linear-finance/graph-network",
   "license": "MIT",
+  "scripts": {
+    "mainnet-codegen": "env-cmd -f ./.env.mainnet.empty ./scripts/codegen.sh mainnet"
+  },
   "dependencies": {
     "@graphprotocol/graph-cli": "^0.35.0",
     "@graphprotocol/graph-ts": "^0.28.1"
+  },
+  "devDependencies": {
+    "env-cmd": "^10.1.0",
+    "envsub": "^4.0.7"
   }
 }

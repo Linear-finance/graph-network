@@ -1,0 +1,27 @@
+specVersion: "0.0.4"
+schema:
+  file: "./schema.graphql"
+dataSources:
+  - kind: "ethereum"
+    name: "LnErc20Bridge"
+    network: "mainnet"
+    source:
+      address: "${LNERC20BRIDGE_ADDRESS}"
+      abi: "LnErc20Bridge"
+      startBlock: ${LNERC20BRIDGE_BLOCK}
+    mapping:
+      kind: "ethereum/events"
+      apiVersion: "0.0.6"
+      language: "wasm/assemblyscript"
+      entities:
+        - "AdminChanged"
+        - "Upgraded"
+      abis:
+        - name: "LnErc20Bridge"
+          file: "./abis/LnErc20Bridge.json"
+      eventHandlers:
+        - event: "TokenDeposited(uint256,uint256,uint256,bytes32,bytes32,bytes32,uint256)"
+          handler: "handleTokenDeposited"
+        - event: "TokenWithdrawn(uint256,uint256,uint256,bytes32,bytes32,bytes32,uint256)"
+          handler: "handleTokenWithdrawn"
+      file: "./src/LnErc20Bridge.ts"
