@@ -26,6 +26,9 @@ fi
 if [ -n "$ACCESS_TOKEN" ]; then
     ACCESS_TOKEN_FLAG="--access-token $ACCESS_TOKEN"
 fi
+if [ -n "$IPFS" ]; then
+    IPFS_FLAG="--ipfs $IPFS"
+fi
 
 yarn envsub "./$NETWORK/subgraph.yaml" "./$NETWORK/subgraph.temp.yaml"
 
@@ -35,5 +38,6 @@ yarn graph deploy \
     --version-label $VERSION_LABEL \
     --output-dir "./$NETWORK/build/" \
     $ACCESS_TOKEN_FLAG \
+    $IPFS_FLAG \
     $SUBGRAPH_NAME \
     "./$NETWORK/subgraph.temp.yaml"
