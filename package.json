@@ -2,5 +2,9 @@
   "name": "graph-network",
   "version": "0.0.0",
   "repository": "https://github.com/Linear-finance/graph-network",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "@graphprotocol/graph-cli": "^0.35.0",
+    "@graphprotocol/graph-ts": "^0.28.1"
+  }
 }
