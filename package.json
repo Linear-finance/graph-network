@@ -5,7 +5,8 @@
   "license": "MIT",
   "scripts": {
     "format": "prettier --write .",
-    "mainnet-codegen": "env-cmd -f ./.env.mainnet.empty ./scripts/codegen.sh mainnet"
+    "mainnet-codegen": "env-cmd -f ./.env.mainnet.empty ./scripts/codegen.sh mainnet",
+    "mainnet-build": "env-cmd -f ./.env.mainnet.empty ./scripts/build.sh mainnet"
   },
   "dependencies": {
     "@graphprotocol/graph-cli": "^0.35.0",
