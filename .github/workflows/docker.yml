@@ -1,0 +1,49 @@
+name: Build Docker Image
+
+on:
+  create:
+
+env:
+  DOCKER_REPOSITORY: "ghcr.io/linear-finance/graph-network"
+
+jobs:
+  build-amd64:
+    if: ${{ startsWith(github.ref, 'refs/tags/mainnet-v') }}
+
+    name: "Build for linux/amd64"
+    runs-on: "ubuntu-latest"
+
+    steps:
+      - name: "Checkout"
+        uses: "actions/checkout@v2"
+
+      - name: "Login to GitHub Packages"
+        uses: "docker/login-action@v1.6.0"
+        with:
+          registry: "ghcr.io"
+          username: "github"
+          password: "${{ secrets.GITHUB_TOKEN }}"
+
+      - name: Enable Docker Buildx
+        run: |
+          docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
+          sudo systemctl restart docker
+          docker buildx create --name multi_builder
+          docker buildx use multi_builder
+
+      - name: "Determine image version"
+        run: |
+          version_line="${{ github.ref }}"
+          regex="^refs\/tags\/mainnet-v(.*)$"
+          [[ $version_line =~ $regex ]];
+          echo "VERSION=${BASH_REMATCH[1]}" >> $GITHUB_ENV
+
+      - name: "Build Docker image"
+        run: |
+          docker buildx build -t ${DOCKER_REPOSITORY}:mainnet-${VERSION} --platform linux/amd64 --output=type=docker .
+
+      - name: "Push Docker image"
+        run: |
+          docker tag ${DOCKER_REPOSITORY}:mainnet-${VERSION} ${DOCKER_REPOSITORY}:mainnet-latest
+          docker push ${DOCKER_REPOSITORY}:mainnet-${VERSION}
+          docker push ${DOCKER_REPOSITORY}:mainnet-latest
