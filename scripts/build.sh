@@ -2,7 +2,9 @@
 
 set -e
 
-NETWORK="$1"
+if [ -n "$1" ]; then
+    NETWORK="$1"
+fi
 
 if [ -z "$NETWORK" ]; then
     echo "Network missing"
