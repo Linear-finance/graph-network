@@ -15,6 +15,7 @@
   "devDependencies": {
     "env-cmd": "^10.1.0",
     "envsub": "^4.0.7",
+    "matchstick-as": "^0.5.0",
     "prettier": "^2.7.1"
   }
 }
