@@ -6,7 +6,8 @@
   "scripts": {
     "format": "prettier --write .",
     "mainnet-codegen": "env-cmd -f ./.env.mainnet.empty ./scripts/codegen.sh",
-    "mainnet-build": "env-cmd -f ./.env.mainnet.empty ./scripts/build.sh"
+    "mainnet-build": "env-cmd -f ./.env.mainnet.empty ./scripts/build.sh",
+    "mainnet-deploy-node": "env-cmd -f ./.env.mainnet.production ./scripts/deploy-node.sh"
   },
   "dependencies": {
     "@graphprotocol/graph-cli": "^0.35.0",
