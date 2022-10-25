@@ -4,6 +4,7 @@
   "repository": "https://github.com/Linear-finance/graph-network",
   "license": "MIT",
   "scripts": {
+    "format": "prettier --write .",
     "mainnet-codegen": "env-cmd -f ./.env.mainnet.empty ./scripts/codegen.sh mainnet"
   },
   "dependencies": {
@@ -12,6 +13,7 @@
   },
   "devDependencies": {
     "env-cmd": "^10.1.0",
-    "envsub": "^4.0.7"
+    "envsub": "^4.0.7",
+    "prettier": "^2.7.1"
   }
 }
