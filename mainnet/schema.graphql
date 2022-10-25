@@ -1,3 +1,26 @@
-type ExampleEntity @entity {
+type TokenDeposit @entity {
   id: ID!
+  srcChainId: BigInt!
+  destChainId: BigInt!
+  depositId: BigInt!
+  depositor: Bytes!
+  recipient: Bytes!
+  currency: Bytes!
+  amount: BigInt!
+  blockHeight: BigInt!
+  txHash: Bytes!
+  timestamp: BigInt!
+}
+
+type TokenWithdrawal @entity {
+  id: ID!
+  srcChainId: BigInt!
+  destChainId: BigInt!
+  depositId: BigInt!
+  depositor: Bytes!
+  recipient: Bytes!
+  currency: Bytes!
+  amount: BigInt!
+  txHash: Bytes!
+  timestamp: BigInt!
 }
